@@ -1,100 +1,59 @@
 using Photon.Pun;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCon : MonoBehaviourPunCallbacks
 {
     //===== 変数 =====
-    //　カメラ親オブジェクト
-    public Transform viewPoint;
+    [SerializeField, Header("カメラ親オブジェクト")]          Transform viewPoint;
+    [SerializeField, Header("レイを飛ばすオブジェクトの位置")]Transform groundCheckPoint;
+    
+    [SerializeField, Header("視点移動速度")]                  float mouseSensitivity = 1f;
+    
+    [SerializeField, Header("地面レイヤー")]                  LayerMask groundLayers;
 
-    // 視点移動の速度
-    public float mouseSensitivity = 1f;
+    [SerializeField, Header("最大HP")]                        int maxHP = 100;
+    [SerializeField, Header("歩きの速度")]                    float walkSpeed = 4f;
+    [SerializeField, Header("走りの速度")]                    float runSpeed = 8f;
+    [SerializeField, Header("ジャンプ力")]                    Vector3 jumpForce = new Vector3(0f, 6f, 0f);
+ 
+    [SerializeField, Header("血のエフェクト")]                GameObject hitEffect;
 
-    // ユーザーのマウス入力格納
-    private Vector2 mouseInput;
+    [SerializeField, Header("反動の大きさ")]                  float handou = 0.2f;
 
-    // y軸の回転格納
-    private float verticalMouseInput;
+    [SerializeField, Header("武器格納リスト")] List<Gun> guns = new List<Gun>();
 
-    // カメラ
-    private Camera cam;
+    [SerializeField, Tooltip("所有弾薬")]       int[] ammunition;
+    [SerializeField, Tooltip("最大所有弾薬")]   int[] maxAmmunition;
+    [SerializeField, Tooltip("マガジン内弾薬")] int[] ammoClip;
+    [SerializeField, Tooltip("マガジンに入る最大弾薬数")] int[] maxAmmoClip;
 
-    // 入力された値を格納
-    private Vector3 moveDir;
+    
+    
 
-    // 進む方向を格納
-    private Vector3 movement;
+// Hidden ------------------------------------------------------------------------------------------------------------------------
+    private UIManager uiMgr;            // UIManager
+    private SpawnMng spawnMng;          // SpawnManager格納
+    GameManager gameManager;            // GameManager格納
 
-    // 移動速度
-    private float MoveSpeed = 4f;
 
-    // ジャンプ力
-    public Vector3 jumpForce = new Vector3(0f, 6f, 0f);
+    private Vector2 mouseInput;         // ユーザーのマウス入力格納
+    
+    private Vector3 moveDir;            // 入力された値を格納
+    private Vector3 movement;           // 進む方向を格納
+    
+    private Camera cam;                 // カメラ
+    
+    private Rigidbody rb;               // 剛体
+    
+    private float verticalMouseInput;   // y軸の回転格納
+    private float MoveSpeed = 4f;       // 移動速度
+    private float shotTime;             // 射撃間隔
+    
+    private bool cursorLock = true;     // カーソルの表示判定
 
-    // レイを飛ばすオブジェクトの位置
-    public Transform groundCheckPoint;
-
-    // 地面レイヤー
-    public LayerMask groundLayers;
-
-    // 剛体
-    private Rigidbody rb;
-
-    // 歩きの速度
-    public float walkSpeed = 4f;
-
-    // 走りの速度
-    public float runSpeed = 8f;
-
-    // カーソルの表示判定
-    private bool cursorLock = true;
-
-    // 武器格納リスト
-    public List<Gun> guns = new List<Gun>();
-
-    // 選択中の武器管理用数値
-    private int selectedGun = 0;
-
-    // 射撃間隔
-    private float shotTime;
-
-    // 所有弾薬
-    [Tooltip("所有弾薬")]
-    public int[] ammunition;
-
-    // 最大弾薬数
-    [Tooltip("最大所有弾薬")]
-    public int[] maxAmmunition;
-
-    // マガジン内弾薬
-    [Tooltip("マガジン内弾薬")]
-    public int[] ammoClip;
-
-    // マガジン内最大弾薬数
-    [Tooltip("マガジンに入る最大弾薬数")]
-    public int[] maxAmmoClip;
-
-    // UIManager
-    private UIManager uiMgr;
-
-    // SpawnManager格納
-    private SpawnMng spawnMng;
-
-    // 最大HP
-    public int maxHP = 100;
-
-    // 現在HP
-    private int currentHP;
-
-    // 血のエフェクト
-    public GameObject hitEffect;
-
-    // GameManager格納
-    GameManager gameManager;
-
-    public float handou = 0.2f;
+    private int selectedGun = 0;        // 選択中の武器管理用数値
+    private int currentHP;              // 現在HP
 
     //===== Awake =====
     private void Awake()

@@ -1,17 +1,15 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
-using Photon.Pun.Demo.Cockpit;
+
 
 public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
 {
     // プレイヤー情報を格納するリストの作成
     public List<PlayerInfo> playerList = new List<PlayerInfo>();
-
 
     // イベント作成
     public enum EventCodes : byte

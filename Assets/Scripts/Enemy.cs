@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public GameObject enemyPrefab; // 敵のプレハブ
-    public Transform[] spawnPoints; // 敵のスポーンポイント
-    public int maxEnemies = 15; // 同時生成最大数
-    public float spawnInterval = 5f; // 生成間隔
+    [SerializeField, Header("")] GameObject enemyPrefab; // 敵のプレハブ
+    [SerializeField, Header("")] Transform[] spawnPoints; // 敵のスポーンポイント
+    [SerializeField, Header("")] int maxEnemies = 15; // 同時生成最大数
+    [SerializeField, Header("")] float spawnInterval = 5f; // 生成間隔
 
     private List<GameObject> enemies = new List<GameObject>();
     public bool continuousSpawn = false;
