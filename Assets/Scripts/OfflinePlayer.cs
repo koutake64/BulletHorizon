@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,36 +5,49 @@ public class OfflinePlayer : MonoBehaviour
 {
     //===== ïœêî =====
     public Transform viewPoint;
-    public float mouseSensitivity = 1f;
-    private Vector2 mouseInput;
-    private float verticalMouseInput;
-    private Camera cam;
-    private Vector3 moveDir;
-    private Vector3 movement;
-    private float MoveSpeed = 4f;
-    public Vector3 jumpForce = new Vector3(0f, 6f, 0f);
+    public GameObject hitEffect;
     public Transform groundCheckPoint;
-    public LayerMask groundLayers;
-    private Rigidbody rb;
+    public List<Gun> guns = new List<Gun>();
+   
+    public float mouseSensitivity = 1f;
     public float walkSpeed = 4f;
     public float runSpeed = 8f;
-    private bool cursorLock = true;
-    public List<Gun> guns = new List<Gun>();
-    private int selectedGun = 1;
-    private float shotTime;
+    public float handou = 0.2f;
+    
+    public Vector3 jumpForce = new Vector3(0f, 6f, 0f);
+    
+    public LayerMask groundLayers;
+    
     [Tooltip("èäóLíeñÚ")]
     public int[] ammunition;
+    
     [Tooltip("ç≈ëÂèäóLíeñÚ")]
     public int[] maxAmmunition;
+    
     [Tooltip("É}ÉKÉWÉìì‡íeñÚ")]
     public int[] ammoClip;
+    
     [Tooltip("É}ÉKÉWÉìÇ…ì¸ÇÈç≈ëÂíeñÚêî")]
     public int[] maxAmmoClip;
-    private OfflineUIMng uiMgr;
-    public GameObject hitEffect;
-    public float handou = 0.2f;
+    
 
-    private bool isPaused = false;
+    private float shotTime;
+	private float MoveSpeed = 4f;
+	private float verticalMouseInput;
+    
+    private int selectedGun = 1;
+    
+    private bool cursorLock = true;
+    
+    private Rigidbody rb;
+    private OfflineUIMng uiMgr;
+	private Camera cam;
+	
+    private Vector2 mouseInput;
+	private Vector3 moveDir;
+	private Vector3 movement;
+
+	private bool isPaused = false;
 
     private void Awake()
     {
@@ -275,11 +287,11 @@ public class OfflinePlayer : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, guns[selectedGun].adsZoom, guns[selectedGun].adsSoeed * Time.deltaTime);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, guns[selectedGun].adsZoom, guns[selectedGun].adsSpeed * Time.deltaTime);
         }
         else
         {
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, 60f, guns[selectedGun].adsSoeed * Time.deltaTime);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, 60f, guns[selectedGun].adsSpeed * Time.deltaTime);
         }
     }
 

@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Realtime;
-using Photon.Pun;
 
 public class Room : MonoBehaviour
 {

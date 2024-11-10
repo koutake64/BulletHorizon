@@ -8,8 +8,10 @@ using ExitGames.Client.Photon;
 
 public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
 {
-    // ƒvƒŒƒCƒ„[î•ñ‚ğŠi”[‚·‚éƒŠƒXƒg‚Ìì¬
-    public List<PlayerInfo> playerList = new List<PlayerInfo>();
+    [SerializeField, Header("ƒvƒŒƒCƒ„[î•ñ‚ğŠi”[‚·‚éƒŠƒXƒg‚Ìì¬")] List<PlayerInfo> playerList = new List<PlayerInfo>();
+    [SerializeField, Header("")] int TargetNumber = 3;
+    [SerializeField, Header("")] float waitAfterEnding = 5f;
+    [SerializeField, Header("ƒQ[ƒ€ó‘ÔŠi”[")] GameState state;
 
     // ƒCƒxƒ“ƒgì¬
     public enum EventCodes : byte
@@ -26,16 +28,10 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
         Ending
     }
 
-    // ƒQ[ƒ€ó‘ÔŠi”[
-    public GameState state;
-
     UIManager uiManager;
 
-    private List<PlayerInformation> playerInfoList = new List<PlayerInformation>();
-
-    public int TargetNumber = 3;
-
-    public float waitAfterEnding = 5f;
+// Hidden ------------------------------------------------------------------------------------------------------------------------
+    private List<PlayerInformation> playerInfoList = new List<PlayerInformation>(); 
 
     private void Awake()
     {

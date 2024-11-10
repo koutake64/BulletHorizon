@@ -103,7 +103,7 @@ MonoBehaviour:
   shootInterval: 1.2
   shootDamage: 50
   adsZoom: 30
-  adsSoeed: 5
+  adsSpeed: 0
   bulletImpact: {fileID: 1201803374893138019, guid: e200902d6e4621f4897396536b340e35, type: 3}
   shotSound: {fileID: 7890881246195568940}
 --- !u!82 &7890881246195568940
@@ -835,7 +835,7 @@ MonoBehaviour:
   shootInterval: 0.1
   shootDamage: 10
   adsZoom: 35
-  adsSoeed: 7
+  adsSpeed: 0
   bulletImpact: {fileID: 5681212490555773915, guid: 9f41a0888574e364a8ad5ab42d535f35, type: 3}
   shotSound: {fileID: 7344927070842047277}
 --- !u!82 &7344927070842047277
@@ -1038,7 +1038,7 @@ MonoBehaviour:
   shootInterval: 0.35
   shootDamage: 10
   adsZoom: 30
-  adsSoeed: 10
+  adsSpeed: 0
   bulletImpact: {fileID: 5681212490555773915, guid: 9f41a0888574e364a8ad5ab42d535f35, type: 3}
   shotSound: {fileID: 3831900528707240686}
 --- !u!82 &3831900528707240686
@@ -1299,14 +1299,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewPoint: {fileID: 3397098984378056495}
-  mouseSensitivity: 1
-  jumpForce: {x: 0, y: 6, z: 0}
   groundCheckPoint: {fileID: 270250492254701111}
+  mouseSensitivity: 1
   groundLayers:
     serializedVersion: 2
     m_Bits: 64
+  maxHP: 100
   walkSpeed: 4
   runSpeed: 8
+  jumpForce: {x: 0, y: 6, z: 0}
+  hitEffect: {fileID: 2975706472557681985, guid: b8be7894ed080394c836368fde63f276, type: 3}
+  handou: -0.4
   guns:
   - {fileID: 5373865276452227779}
   - {fileID: 1962398592246816990}
@@ -1315,9 +1318,6 @@ MonoBehaviour:
   maxAmmunition: 3200000014000000f0000000
   ammoClip: 060000000200000018000000
   maxAmmoClip: 060000000200000018000000
-  maxHP: 100
-  hitEffect: {fileID: 2975706472557681985, guid: b8be7894ed080394c836368fde63f276, type: 3}
-  handou: -0.4
 --- !u!114 &2718895130307555378
 MonoBehaviour:
   m_ObjectHideFlags: 0

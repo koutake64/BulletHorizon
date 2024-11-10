@@ -8,9 +8,11 @@ public class Offline : MonoBehaviour
 {
     [SerializeField] private GameObject PausePanel;
     [SerializeField] private GameObject Buttons;
+    [SerializeField] private string SceneName;
+
+// Hidden ------------------------------------------------------------------------------------------------------------------------
     private bool Panel;
     private OfflinePlayer player;
-    [SerializeField] private string SceneName; 
 
     private void Start()
     {

@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
-using Photon.Pun.Demo.Asteroids;
 
 public class PhotonMng : MonoBehaviourPunCallbacks
 {

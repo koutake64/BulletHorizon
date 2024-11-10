@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class OfflineUIMng : MonoBehaviour
 {   
     //===== ïœêî =====
-    public Text ammoText;
+    [SerializeField] Text ammoText;
 
     public void SettingBulletsText(int ammoClip, int ammunition)
     {

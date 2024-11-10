@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField, Header("")] GameObject enemyPrefab; // 敵のプレハブ
-    [SerializeField, Header("")] Transform[] spawnPoints; // 敵のスポーンポイント
-    [SerializeField, Header("")] int maxEnemies = 15; // 同時生成最大数
-    [SerializeField, Header("")] float spawnInterval = 5f; // 生成間隔
+    [SerializeField, Header("敵のプレハブ")] GameObject enemyPrefab;
+    [SerializeField, Header("敵のスポーンポイント")] Transform[] spawnPoints;
 
-    private List<GameObject> enemies = new List<GameObject>();
+    [SerializeField, Header("同時生成最大数")] int maxEnemies = 15;
+    [SerializeField, Header("生成間隔")] float spawnInterval = 5f;
+
     public bool continuousSpawn = false;
-    public bool spawning = false; // 最初はFalse
+    public bool spawning = false;
 
-    private void Start()
-    {
-        // ここではToggleSpawningを呼び出しません
-    }
+// Hidden ------------------------------------------------------------------------------------------------------------------------
+    private List<GameObject> enemies = new List<GameObject>();
+
 
     private IEnumerator SpawnEnemies()
     {

@@ -7,8 +7,6 @@ public class PlayerController : MonoBehaviourPunCallbacks
     float speed = 3f;
     SpawnManager spawnManager;
 
-
-
     private void Awake()
     {
         spawnManager = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManager>();

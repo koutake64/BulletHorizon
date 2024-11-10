@@ -322,11 +322,11 @@ public class PlayerCon : MonoBehaviourPunCallbacks
         // 右クリック検知
         if(Input.GetMouseButton(1))
         {
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, guns[selectedGun].adsZoom, guns[selectedGun].adsSoeed * Time.deltaTime);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, guns[selectedGun].adsZoom, guns[selectedGun].adsSpeed * Time.deltaTime);
         }
         else
         {
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, 60f, guns[selectedGun].adsSoeed * Time.deltaTime);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, 60f, guns[selectedGun].adsSpeed * Time.deltaTime);
         }
     }
 
