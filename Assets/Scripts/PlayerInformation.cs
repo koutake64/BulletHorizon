@@ -3,14 +3,14 @@ using UnityEngine.UI;
 
 public class PlayerInformation : MonoBehaviour
 {
-    // 名前テキスト
-    public Text playerNameText;
+	// 名前テキスト
+	[SerializeField] Text playerNameText;
 
     // キルテキスト
-    public Text killesText;
+    [SerializeField] Text killesText;
 
-    // デステキスト
-    public Text deathText;
+	// デステキスト
+	[SerializeField] Text deathText;
 
     // 表に名前やキルデス数を表示する
     public void SetPlayerDetailes(string name, int kill, int death)

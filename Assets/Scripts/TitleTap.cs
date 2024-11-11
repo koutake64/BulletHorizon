@@ -1,21 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class TitleTap : MonoBehaviour
 {
-    //public GameObject Button;
-    public string SceneName;
-    public Image fadePanel;
-    public GameObject fadePanelPrefab;
-    public float fadeDuration = 1.0f;
-
-    private void Start()
-    {
-        //StartCoroutine(FadeOutAndLoadScene());
-    }
+    [SerializeField] string SceneName;
+    [SerializeField] Image fadePanel;
+    [SerializeField] GameObject fadePanelPrefab;
+	[SerializeField] float fadeDuration = 1.0f;
 
     public void ChangeScene()
     {

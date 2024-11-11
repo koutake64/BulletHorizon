@@ -6,18 +6,18 @@ public class PlayerBullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Enemy enemyScript = FindObjectOfType<Enemy>();
+            Enemy enemyScript = FindAnyObjectByType<Enemy>();
             enemyScript.RemoveEnemy(collision.gameObject);
         }
         else if (collision.gameObject.CompareTag("SpawnModeSwitch"))
         {
-            Enemy enemyScript = FindObjectOfType<Enemy>();
+            Enemy enemyScript = FindAnyObjectByType<Enemy>();
             enemyScript.ToggleSpawnMode();
             UpdateSwitchColor(collision.gameObject, enemyScript.continuousSpawn);
         }
         else if (collision.gameObject.CompareTag("SpawnToggle"))
         {
-            Enemy enemyScript = FindObjectOfType<Enemy>();
+            Enemy enemyScript = FindAnyObjectByType<Enemy>();
             enemyScript.ToggleSpawning();
             UpdateSwitchColor(collision.gameObject, enemyScript.spawning);
         }

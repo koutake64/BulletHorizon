@@ -17,12 +17,12 @@ public class Gun : MonoBehaviour
 
     // 覗き込み時の速度
     [Tooltip("覗き込み時の速度")]
-    public float adsSpeed;
+    public float adsSoeed;
 
     // 弾痕オブジェクト
     public GameObject bulletImpact;
 
-    [SerializeField] AudioSource shotSound;
+    public AudioSource shotSound;
 
     public void SoundGunShot()
     {

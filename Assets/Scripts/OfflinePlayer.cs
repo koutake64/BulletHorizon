@@ -4,50 +4,41 @@ using UnityEngine;
 public class OfflinePlayer : MonoBehaviour
 {
     //===== ïœêî =====
-    public Transform viewPoint;
-    public GameObject hitEffect;
-    public Transform groundCheckPoint;
-    public List<Gun> guns = new List<Gun>();
-   
-    public float mouseSensitivity = 1f;
-    public float walkSpeed = 4f;
-    public float runSpeed = 8f;
-    public float handou = 0.2f;
-    
-    public Vector3 jumpForce = new Vector3(0f, 6f, 0f);
-    
-    public LayerMask groundLayers;
-    
-    [Tooltip("èäóLíeñÚ")]
-    public int[] ammunition;
-    
+    [SerializeField] Transform viewPoint;
+	[SerializeField] float mouseSensitivity = 1f;
+	[SerializeField] Vector3 jumpForce = new Vector3(0f, 6f, 0f);
+	[SerializeField] Transform groundCheckPoint;
+	[SerializeField] LayerMask groundLayers;
+	[SerializeField] float walkSpeed = 4f;
+	[SerializeField] float runSpeed = 8f;
+	[SerializeField] List<Gun> guns = new List<Gun>();
+
+	private float MoveSpeed = 4f;
+    private float verticalMouseInput;
+    private float shotTime;
+    private int selectedGun = 1;
+    private bool cursorLock = true;
+	private Vector3 resetPos = new Vector3(0f, 2f, -5f);
+
+	private Camera cam;
+	private Vector2 mouseInput;
+    private Vector3 moveDir;
+    private Vector3 movement;
+	private Rigidbody rb;
+    private OfflineUIMng uiMgr;
+
+	[Tooltip("èäóLíeñÚ")]
+	[SerializeField] int[] ammunition;
     [Tooltip("ç≈ëÂèäóLíeñÚ")]
-    public int[] maxAmmunition;
-    
+	[SerializeField] int[] maxAmmunition;
     [Tooltip("É}ÉKÉWÉìì‡íeñÚ")]
     public int[] ammoClip;
-    
     [Tooltip("É}ÉKÉWÉìÇ…ì¸ÇÈç≈ëÂíeñÚêî")]
-    public int[] maxAmmoClip;
-    
+	[SerializeField] int[] maxAmmoClip;
+	[SerializeField] GameObject hitEffect;
+	[SerializeField] float handou = 0.2f;
 
-    private float shotTime;
-	private float MoveSpeed = 4f;
-	private float verticalMouseInput;
-    
-    private int selectedGun = 1;
-    
-    private bool cursorLock = true;
-    
-    private Rigidbody rb;
-    private OfflineUIMng uiMgr;
-	private Camera cam;
-	
-    private Vector2 mouseInput;
-	private Vector3 moveDir;
-	private Vector3 movement;
-
-	private bool isPaused = false;
+    private bool isPaused = false;
 
     private void Awake()
     {
@@ -56,7 +47,7 @@ public class OfflinePlayer : MonoBehaviour
 
     private void Start()
     {
-        cam = Camera.main;
+		cam = Camera.main;
         rb = GetComponent<Rigidbody>();
         UpdateCursorLock();
     }
@@ -82,6 +73,11 @@ public class OfflinePlayer : MonoBehaviour
         Aim();  // Aimä÷êîÇåƒÇ—èoÇ∑
         SwitchingGuns();
         UpdateCursorLock();
+
+		if(transform.position.y <= -10)
+		{
+			transform.position = resetPos;
+		}
     }
 
     private void FixedUpdate()
@@ -223,18 +219,18 @@ public class OfflinePlayer : MonoBehaviour
         {
             if (hit.collider.gameObject.CompareTag("Enemy"))
             {
-                Enemy enemyScript = FindObjectOfType<Enemy>();
+                Enemy enemyScript = FindAnyObjectByType<Enemy>();
                 enemyScript.RemoveEnemy(hit.collider.gameObject);
             }
             else if (hit.collider.gameObject.CompareTag("SpawnModeSwitch"))
             {
-                Enemy enemyScript = FindObjectOfType<Enemy>();
+                Enemy enemyScript = FindAnyObjectByType<Enemy>();
                 enemyScript.ToggleSpawnMode();
                 UpdateSwitchColor(hit.collider.gameObject, enemyScript.continuousSpawn);
             }
             else if (hit.collider.gameObject.CompareTag("SpawnToggle"))
             {
-                Enemy enemyScript = FindObjectOfType<Enemy>();
+                Enemy enemyScript = FindAnyObjectByType<Enemy>();
                 enemyScript.ToggleSpawning();
                 UpdateSwitchColor(hit.collider.gameObject, enemyScript.spawning);
             }
@@ -287,11 +283,11 @@ public class OfflinePlayer : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, guns[selectedGun].adsZoom, guns[selectedGun].adsSpeed * Time.deltaTime);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, guns[selectedGun].adsZoom, guns[selectedGun].adsSoeed * Time.deltaTime);
         }
         else
         {
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, 60f, guns[selectedGun].adsSpeed * Time.deltaTime);
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, 60f, guns[selectedGun].adsSoeed * Time.deltaTime);
         }
     }
 

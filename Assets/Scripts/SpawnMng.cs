@@ -3,17 +3,17 @@ using Photon.Pun;
 
 public class SpawnMng : MonoBehaviour
 {
-    // spawnPoint格納配列作成
-    public Transform[] spawnPoints;
+	// spawnPoint格納配列作成
+	[SerializeField] Transform[] spawnPoints;
 
-    // 生成するプレイヤーオブジェクト
-    public GameObject playerPrefab;
+	// 生成するプレイヤーオブジェクト
+	[SerializeField] GameObject playerPrefab;
 
     // 生成したプログラムオブジェクト
     private GameObject player;
 
-    // スポーンまでのインターバル
-    public float respawnInterval = 5f;
+	// スポーンまでのインターバル
+	[SerializeField] float respawnInterval = 5f;
 
     //===== Start =====
     private void Start()

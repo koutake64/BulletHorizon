@@ -1,17 +1,17 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
-
+using Photon.Pun.Demo.Cockpit;
 
 public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
 {
-    [SerializeField, Header("ƒvƒŒƒCƒ„[î•ñ‚ğŠi”[‚·‚éƒŠƒXƒg‚Ìì¬")] List<PlayerInfo> playerList = new List<PlayerInfo>();
-    [SerializeField, Header("")] int TargetNumber = 3;
-    [SerializeField, Header("")] float waitAfterEnding = 5f;
-    [SerializeField, Header("ƒQ[ƒ€ó‘ÔŠi”[")] GameState state;
+    // ƒvƒŒƒCƒ„[î•ñ‚ğŠi”[‚·‚éƒŠƒXƒg‚Ìì¬
+    public List<PlayerInfo> playerList = new List<PlayerInfo>();
+
 
     // ƒCƒxƒ“ƒgì¬
     public enum EventCodes : byte
@@ -28,10 +28,16 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
         Ending
     }
 
+    // ƒQ[ƒ€ó‘ÔŠi”[
+    public GameState state;
+
     UIManager uiManager;
 
-// Hidden ------------------------------------------------------------------------------------------------------------------------
-    private List<PlayerInformation> playerInfoList = new List<PlayerInformation>(); 
+    private List<PlayerInformation> playerInfoList = new List<PlayerInformation>();
+
+    public int TargetNumber = 3;
+
+    public float waitAfterEnding = 5f;
 
     private void Awake()
     {

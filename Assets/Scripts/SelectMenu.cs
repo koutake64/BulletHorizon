@@ -3,12 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class SelectMenu : MonoBehaviour
 {
-    public GameObject ConfigPanel;
-    public GameObject Buttons;
-    public GameObject GameQuitPanel;
+    [SerializeField] GameObject ConfigPanel;
+    [SerializeField] GameObject Buttons;
+	[SerializeField] GameObject GameQuitPanel;
 
-    public string SceneName;
-    public string SceneName2;
+    [SerializeField] string SceneName;
+    [SerializeField] string SceneName2;
 
     private void Start()
     {

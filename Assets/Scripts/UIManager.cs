@@ -4,19 +4,19 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     // 既存の変数
-    public Text ammoText;
-    public Slider HPSlider;
-    public GameObject deathPanel;
-    public Text deathText;
-    public GameObject scoreboard;
+    [SerializeField] Text ammoText;
+    [SerializeField] Slider HPSlider;
+    [SerializeField] GameObject deathPanel;
+    [SerializeField] Text deathText;
+    [SerializeField] GameObject scoreboard;
     public PlayerInformation info;
-    public GameObject endPanel;
+	[SerializeField] GameObject endPanel;
 
-    // ダメージ方向を示す矢印
-    public GameObject damageIndicatorArrow;
+	// ダメージ方向を示す矢印
+	[SerializeField] GameObject damageIndicatorArrow;
 
-    // キルログ表示用のテキストフィールド
-    public Text killLogText;
+	// キルログ表示用のテキストフィールド
+	[SerializeField] Text killLogText;
 
     // 弾薬テキストを設定
     public void SettingBulletsText(int ammoClip, int ammunition)

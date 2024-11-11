@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 public class VolumeManager : MonoBehaviour
 {
-    public Slider masterSlider;
-    public Slider bgmSlider;
-    public Slider seSlider;
+    [SerializeField] Slider masterSlider;
+	[SerializeField] Slider bgmSlider;
+	[SerializeField] Slider seSlider;
 
     private const string MasterVolumeKey = "MasterVolume";
     private const string BGMVolumeKey = "BGMVolume";

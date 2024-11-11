@@ -4,7 +4,7 @@ using Photon.Realtime;
 
 public class Room : MonoBehaviour
 {
-    public Text buttonText;
+	[SerializeField] Text buttonText;
 
     private RoomInfo info;
 

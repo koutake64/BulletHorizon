@@ -2,6 +2,7 @@
 // By Keijiro Takahashi, 2013
 // https://github.com/keijiro/unity-audio-spectrum
 using UnityEngine;
+using System.Collections;
 
 public class AudioSpectrum : MonoBehaviour
 {

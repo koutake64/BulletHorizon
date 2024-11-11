@@ -1,22 +1,21 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class tama : MonoBehaviour
 {
-    float x = 0;
-    GameObject obj;
-    float timer = 0.0f;
-    public float interval = 0.5f; // 3•bŠÔŠu
+	[SerializeField] float interval = 0.5f; // 3•bŠÔŠu
 
-    // Start is called before the first frame update
+	GameObject obj;
+
+	private float x = 0;
+    private float timer = 0.0f;
+
     void Start()
     {
         // CubeƒvƒŒƒnƒu‚ğGameObjectŒ^‚Åæ“¾
         obj = (GameObject)Resources.Load("tama");
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Œo‰ßŠÔ‚ğXV

@@ -1,17 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Offline : MonoBehaviour
 {
-    [SerializeField] private GameObject PausePanel;
-    [SerializeField] private GameObject Buttons;
-    [SerializeField] private string SceneName;
+    [SerializeField] GameObject PausePanel;
+    [SerializeField] GameObject Buttons;
+    [SerializeField] string SceneName;
 
-// Hidden ------------------------------------------------------------------------------------------------------------------------
-    private bool Panel;
+	private bool Panel;
     private OfflinePlayer player;
 
     private void Start()
