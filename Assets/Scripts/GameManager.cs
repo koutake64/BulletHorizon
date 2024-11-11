@@ -1,20 +1,21 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
-using Photon.Pun.Demo.Cockpit;
 
 public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
 {
     // ƒvƒŒƒCƒ„[î•ñ‚ğŠi”[‚·‚éƒŠƒXƒg‚Ìì¬
     public List<PlayerInfo> playerList = new List<PlayerInfo>();
+	// ƒQ[ƒ€ó‘ÔŠi”[
+	public GameState state;
+	public int TargetNumber = 3;
+	public float waitAfterEnding = 5f;
 
-
-    // ƒCƒxƒ“ƒgì¬
-    public enum EventCodes : byte
+	// ƒCƒxƒ“ƒgì¬
+	public enum EventCodes : byte
     {
         NewPlayer,
         ListPlayers,
@@ -28,18 +29,14 @@ public class GameManager : MonoBehaviourPunCallbacks, IOnEventCallback
         Ending
     }
 
-    // ƒQ[ƒ€ó‘ÔŠi”[
-    public GameState state;
-
     UIManager uiManager;
 
+
+//===== Hide --------------------------------------------------------------------------------------------------------------------
     private List<PlayerInformation> playerInfoList = new List<PlayerInformation>();
 
-    public int TargetNumber = 3;
 
-    public float waitAfterEnding = 5f;
-
-    private void Awake()
+	private void Awake()
     {
         uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
     }

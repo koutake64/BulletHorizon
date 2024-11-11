@@ -6,7 +6,8 @@ public class TitleUI : MonoBehaviour
 	[SerializeField] float DurationSeconds;
 	[SerializeField] Ease EaseType;
 
-    private CanvasGroup canvasGroup;
+//===== Hide --------------------------------------------------------------------------------------------------------------------
+	private CanvasGroup canvasGroup;
 
     void Start()
     {

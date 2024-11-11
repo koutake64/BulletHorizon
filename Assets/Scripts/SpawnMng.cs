@@ -8,12 +8,11 @@ public class SpawnMng : MonoBehaviour
 
 	// 生成するプレイヤーオブジェクト
 	[SerializeField] GameObject playerPrefab;
+	[SerializeField, Header("リスポーン時間")] float respawnInterval;
 
-    // 生成したプログラムオブジェクト
-    private GameObject player;
+//===== Hide --------------------------------------------------------------------------------------------------------------------
+	private GameObject player;
 
-	// スポーンまでのインターバル
-	[SerializeField] float respawnInterval = 5f;
 
     //===== Start =====
     private void Start()

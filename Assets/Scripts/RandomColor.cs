@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class RandomColor : MonoBehaviour
 {
-    // 対象オブジェクトのRendererコンポーネント
-    private Renderer objRenderer;
 
-    void Start()
+//===== Hide --------------------------------------------------------------------------------------------------------------------
+	private Renderer objRenderer;   // 対象オブジェクトのRendererコンポーネント
+
+	void Start()
     {
         // Rendererコンポーネントを取得
         objRenderer = GetComponent<Renderer>();

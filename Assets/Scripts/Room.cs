@@ -6,7 +6,8 @@ public class Room : MonoBehaviour
 {
 	[SerializeField] Text buttonText;
 
-    private RoomInfo info;
+//===== Hide --------------------------------------------------------------------------------------------------------------------
+	private RoomInfo info;
 
     public void RegisterRoomDetails(RoomInfo info)
     {

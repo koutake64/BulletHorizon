@@ -7,8 +7,8 @@ public class SelectMenu : MonoBehaviour
     [SerializeField] GameObject Buttons;
 	[SerializeField] GameObject GameQuitPanel;
 
-    [SerializeField] string SceneName;
-    [SerializeField] string SceneName2;
+	[SerializeField, SceneSelector] string SceneName;
+	[SerializeField, SceneSelector] string SceneName2;
 
     private void Start()
     {
@@ -50,7 +50,7 @@ public class SelectMenu : MonoBehaviour
         SceneManager.LoadScene(SceneName2);
     }
 
-    public  void openpanel()
+    public  void Openpanel()
     {
         CloseUI();
         ConfigPanel.SetActive(true);

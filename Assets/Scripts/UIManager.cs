@@ -3,23 +3,21 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    // 既存の変数
-    [SerializeField] Text ammoText;
-    [SerializeField] Slider HPSlider;
-    [SerializeField] GameObject deathPanel;
-    [SerializeField] Text deathText;
+    [SerializeField, Header("玉表示テキスト")] Text ammoText;
+    [SerializeField, Header("死亡時テキスト")] Text deathText;
+	[SerializeField, Header("キルログ表示テキスト")] Text killLogText;
+    [SerializeField, Header("HPスライダー")] Slider HPSlider;
+	
+	[Header("各パネル設定")]
+	[SerializeField] GameObject deathPanel;
     [SerializeField] GameObject scoreboard;
-    public PlayerInformation info;
 	[SerializeField] GameObject endPanel;
 
-	// ダメージ方向を示す矢印
-	[SerializeField] GameObject damageIndicatorArrow;
+	public PlayerInformation info;
 
-	// キルログ表示用のテキストフィールド
-	[SerializeField] Text killLogText;
 
-    // 弾薬テキストを設定
-    public void SettingBulletsText(int ammoClip, int ammunition)
+	// 弾薬テキストを設定
+	public void SettingBulletsText(int ammoClip, int ammunition)
     {
         ammoText.text = ammoClip + "/" + ammunition;
     }
@@ -39,8 +37,15 @@ public class UIManager : MonoBehaviour
         Invoke("CloseDeathUI", 5f);
     }
 
-    // デスUIを閉じる
-    public void CloseDeathUI()
+	public void UpdateFallDeathUI()
+	{
+		deathPanel.SetActive(true);
+		deathText.text = "落下死した。";
+		Invoke("CloseDeathUI", 5f);
+	}
+
+	// デスUIを閉じる
+	public void CloseDeathUI()
     {
         deathPanel.SetActive(false);
     }
@@ -55,28 +60,6 @@ public class UIManager : MonoBehaviour
     public void OpenEndPanel()
     {
         endPanel.SetActive(true);
-    }
-
-    // ダメージ方向を示す矢印を表示
-    public void ShowDamageDirection(Vector3 damageSourcePosition)
-    {
-        Vector3 direction = damageSourcePosition - Camera.main.transform.position;
-        direction.y = 0; // 水平方向のみ考慮
-
-        float angle = Vector3.SignedAngle(Camera.main.transform.forward, direction, Vector3.up);
-        damageIndicatorArrow.transform.rotation = Quaternion.Euler(0, 0, -angle);
-
-        // 矢印を表示する
-        damageIndicatorArrow.SetActive(true);
-
-        // 一定時間後に矢印を非表示にする
-        Invoke("HideDamageIndicator", 2f);
-    }
-
-    // ダメージ矢印を非表示にする
-    private void HideDamageIndicator()
-    {
-        damageIndicatorArrow.SetActive(false);
     }
 
     // キルログを更新

@@ -1,100 +1,48 @@
 using Photon.Pun;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCon : MonoBehaviourPunCallbacks
 {
-    //===== 変数 =====
-    //　カメラ親オブジェクト
-    public Transform viewPoint;
+	//===== 変数 =====　
+	[SerializeField, Header("カメラ親オブジェクト")] Transform viewPoint;
+	[SerializeField, Header("レイを飛ばすオブジェクトの位置")] Transform groundCheckPoint;
+	[SerializeField, Header("地面レイヤー")] LayerMask groundLayers;
+	[SerializeField, Header("ジャンプ力")] Vector3 jumpForce = new Vector3(0f, 6f, 0f);
+	[SerializeField, Header("武器格納リスト")] List<Gun> guns = new List<Gun>();
+	[SerializeField, Header("血のエフェクト")] GameObject hitEffect;
 
-    // 視点移動の速度
-    public float mouseSensitivity = 1f;
+	[SerializeField, Header("視点移動の速度")] float mouseSensitivity;
+	[SerializeField, Header("歩きの速度")] float walkSpeed;
+	[SerializeField, Header("走りの速度")] float runSpeed;
+	[SerializeField, Header("銃反動")] float handou;
 
-    // ユーザーのマウス入力格納
-    private Vector2 mouseInput;
+	[SerializeField, Tooltip("所有弾薬")] int[] ammunition;
+	[SerializeField, Tooltip("最大所有弾薬")] int[] maxAmmunition;
+	[SerializeField, Tooltip("マガジン内弾薬")] int[] ammoClip;
+	[SerializeField, Tooltip("マガジンに入る最大弾薬数")] int[] maxAmmoClip;
+	[SerializeField, Header("最大HP")] int maxHP;
 
-    // y軸の回転格納
-    private float verticalMouseInput;
+//===== Hide --------------------------------------------------------------------------------------------------------------------
 
-    // カメラ
-    private Camera cam;
+	private Camera cam;                 // カメラ
+	private Rigidbody rb;               // 剛体
+	private UIManager uiMgr;            // UIManager
+	private SpawnMng spawnMng;          // SpawnManager格納
+    private GameManager gameManager;    // GameManager格納
 
-    // 入力された値を格納
-    private Vector3 moveDir;
+	private Vector2 mouseInput;			// ユーザーのマウス入力格納
+	private Vector3 moveDir;			// 入力された値を格納
+    private Vector3 movement;           // 進む方向を格納
 
-    // 進む方向を格納
-    private Vector3 movement;
+	private float verticalMouseInput;   // y軸の回転格納
+	private float MoveSpeed = 4f;       // 移動速度
+	private float shotTime;             // 射撃間隔
 
-    // 移動速度
-    private float MoveSpeed = 4f;
+	private int selectedGun = 0;        // 選択中の武器管理用数値
+    private int currentHP;				// 現在HP
 
-    // ジャンプ力
-    public Vector3 jumpForce = new Vector3(0f, 6f, 0f);
-
-    // レイを飛ばすオブジェクトの位置
-    public Transform groundCheckPoint;
-
-    // 地面レイヤー
-    public LayerMask groundLayers;
-
-    // 剛体
-    private Rigidbody rb;
-
-    // 歩きの速度
-    public float walkSpeed = 4f;
-
-    // 走りの速度
-    public float runSpeed = 8f;
-
-    // カーソルの表示判定
-    private bool cursorLock = true;
-
-    // 武器格納リスト
-    public List<Gun> guns = new List<Gun>();
-
-    // 選択中の武器管理用数値
-    private int selectedGun = 0;
-
-    // 射撃間隔
-    private float shotTime;
-
-    // 所有弾薬
-    [Tooltip("所有弾薬")]
-    public int[] ammunition;
-
-    // 最大弾薬数
-    [Tooltip("最大所有弾薬")]
-    public int[] maxAmmunition;
-
-    // マガジン内弾薬
-    [Tooltip("マガジン内弾薬")]
-    public int[] ammoClip;
-
-    // マガジン内最大弾薬数
-    [Tooltip("マガジンに入る最大弾薬数")]
-    public int[] maxAmmoClip;
-
-    // UIManager
-    private UIManager uiMgr;
-
-    // SpawnManager格納
-    private SpawnMng spawnMng;
-
-    // 最大HP
-    public int maxHP = 100;
-
-    // 現在HP
-    private int currentHP;
-
-    // 血のエフェクト
-    public GameObject hitEffect;
-
-    // GameManager格納
-    GameManager gameManager;
-
-    public float handou = 0.2f;
+	private bool cursorLock = true;     // カーソルの表示判定
 
     //===== Awake =====
     private void Awake()
@@ -122,9 +70,6 @@ public class PlayerCon : MonoBehaviourPunCallbacks
 
         // カーソルの表示判定
         UpdateCursorLock();
-
-        // randomの位置でスポーンさせる
-        //transform.position = spawnMng.GetSpawnPoint().position;
 
         if(photonView.IsMine)
         {
@@ -177,7 +122,7 @@ public class PlayerCon : MonoBehaviourPunCallbacks
             {
                 currentHP = 0;
 
-                uiMgr.UpdateDeathUI(name);
+                uiMgr.UpdateFallDeathUI();
 
                 spawnMng.Die();
             }
@@ -465,7 +410,6 @@ public class PlayerCon : MonoBehaviourPunCallbacks
             if (damageSourcePhotonView != null)
             {
                 Vector3 damageSourcePosition = damageSourcePhotonView.transform.position;
-                uiMgr.ShowDamageDirection(damageSourcePosition);
             }
             else
             {

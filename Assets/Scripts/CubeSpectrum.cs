@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CubeSpectrum : MonoBehaviour
 {
-    public AudioSpectrum spectrum;
+    [SerializeField] AudioSpectrum spectrum;
     //オブジェクトの配列（
-    public Transform[] cubes;
+    [SerializeField] Transform[] cubes;
     //スペクトラムの高さ倍率
-    public float scale;
+    [SerializeField] float scale;
 
     private void Update()
     {

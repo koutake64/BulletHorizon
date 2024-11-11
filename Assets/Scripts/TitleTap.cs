@@ -5,15 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class TitleTap : MonoBehaviour
 {
-    [SerializeField] string SceneName;
+	[SerializeField, SceneSelector] string SceneName;
     [SerializeField] Image fadePanel;
     [SerializeField] GameObject fadePanelPrefab;
-	[SerializeField] float fadeDuration = 1.0f;
+
+	[SerializeField] float fadeDuration;
 
     public void ChangeScene()
     {
         StartCoroutine(FadeOutAndLoadScene());
-        //SceneManager.LoadScene(SceneName);
     }
 
     public IEnumerator FadeOutAndLoadScene()

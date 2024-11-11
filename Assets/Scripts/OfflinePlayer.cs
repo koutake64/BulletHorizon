@@ -5,39 +5,39 @@ public class OfflinePlayer : MonoBehaviour
 {
     //===== •Ï” =====
     [SerializeField] Transform viewPoint;
-	[SerializeField] float mouseSensitivity = 1f;
 	[SerializeField] Vector3 jumpForce = new Vector3(0f, 6f, 0f);
 	[SerializeField] Transform groundCheckPoint;
 	[SerializeField] LayerMask groundLayers;
-	[SerializeField] float walkSpeed = 4f;
-	[SerializeField] float runSpeed = 8f;
 	[SerializeField] List<Gun> guns = new List<Gun>();
+	[SerializeField] GameObject hitEffect;
+
+	[SerializeField] float mouseSensitivity;
+	[SerializeField] float walkSpeed;
+	[SerializeField] float runSpeed;
+	[SerializeField, Header("”½“®")] float handou;
+
+	[SerializeField, Tooltip("Š—L’e–ò")] int[] ammunition;
+	[SerializeField, Tooltip("Å‘åŠ—L’e–ò")] int[] maxAmmunition;
+	[SerializeField, Tooltip("ƒ}ƒKƒWƒ““à’e–ò")] int[] ammoClip;
+	[SerializeField, Tooltip("ƒ}ƒKƒWƒ“‚É“ü‚éÅ‘å’e–ò”")] int[] maxAmmoClip;
+
+//===== Hide --------------------------------------------------------------------------------------------------------------------
+	private Rigidbody rb;
+	private OfflineUIMng uiMgr;
+	private Camera cam;
+
+	private Vector2 mouseInput;
+	private Vector3 resetPos = new Vector3(0f, 2f, -5f);
+	private Vector3 moveDir;
+	private Vector3 movement;
 
 	private float MoveSpeed = 4f;
     private float verticalMouseInput;
     private float shotTime;
-    private int selectedGun = 1;
-    private bool cursorLock = true;
-	private Vector3 resetPos = new Vector3(0f, 2f, -5f);
 
-	private Camera cam;
-	private Vector2 mouseInput;
-    private Vector3 moveDir;
-    private Vector3 movement;
-	private Rigidbody rb;
-    private OfflineUIMng uiMgr;
+	private int selectedGun = 1;
 
-	[Tooltip("Š—L’e–ò")]
-	[SerializeField] int[] ammunition;
-    [Tooltip("Å‘åŠ—L’e–ò")]
-	[SerializeField] int[] maxAmmunition;
-    [Tooltip("ƒ}ƒKƒWƒ““à’e–ò")]
-    public int[] ammoClip;
-    [Tooltip("ƒ}ƒKƒWƒ“‚É“ü‚éÅ‘å’e–ò”")]
-	[SerializeField] int[] maxAmmoClip;
-	[SerializeField] GameObject hitEffect;
-	[SerializeField] float handou = 0.2f;
-
+	private bool cursorLock = true;
     private bool isPaused = false;
 
     private void Awake()

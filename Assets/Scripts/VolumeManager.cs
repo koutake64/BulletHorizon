@@ -6,8 +6,9 @@ public class VolumeManager : MonoBehaviour
     [SerializeField] Slider masterSlider;
 	[SerializeField] Slider bgmSlider;
 	[SerializeField] Slider seSlider;
-
-    private const string MasterVolumeKey = "MasterVolume";
+	
+//===== Hide --------------------------------------------------------------------------------------------------------------------
+	private const string MasterVolumeKey = "MasterVolume";
     private const string BGMVolumeKey = "BGMVolume";
     private const string SEVolumeKey = "SEVolume";
 
